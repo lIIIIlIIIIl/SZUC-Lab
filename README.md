@@ -12,6 +12,10 @@
 
 ## 3. 个人文件夹命名及内容  
 每位开发人员应在任务文件夹（例如“Bar Render”）内创建以自己ID命名的子文件夹。在该文件夹中只需包含`src`文件夹，用于存放代码和资源。
+``` bash
+cd SZUC-Lab/'Bar Render' && mkdir $Name find . -maxdepth 1 -type f -exec cp {} $Name \;
+# 创建个人文件夹的代码，替换$Name 为你的昵称，带下划线请保留
+```
 
 ## 4. 提交流程
 - 完成任务后，准备好本地 Git 仓库文件结构。
