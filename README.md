@@ -13,8 +13,10 @@
 ## 3. 个人文件夹命名及内容  
 每位开发人员应在任务文件夹（例如“Bar Render”）内创建以自己ID命名的子文件夹。在该文件夹中只需包含`src`文件夹，用于存放代码和资源。
 ``` bash
-cd SZUC-Lab/'Bar Render' && mkdir $Name find . -maxdepth 1 -type f -exec cp {} $Name \;
-# 创建个人文件夹的代码，替换$Name 为你的昵称，带下划线请保留
+cd SZUC-Lab/
+
+# git后创建个人文件夹的命令示例，替换"your_name"的内容为你的昵称，带下划线时请保留
+Name="your_name" && (cd 'Bar Render' && mkdir "$Name" && find . -maxdepth 1 -type f -exec cp {} "$Name" \;)
 ```
 
 ## 4. 提交流程
@@ -25,3 +27,7 @@ cd SZUC-Lab/'Bar Render' && mkdir $Name find . -maxdepth 1 -type f -exec cp {} $
 
 ## 5. 仓库同步  
 注意保持克隆仓库与主仓库的同步，在主仓库更新时及时拉取更新。
+
+## 6. 代码规范
+- 代码风格请尽量遵循阿里巴巴开发规范：https://github.com/alibaba/p3c
+- 需要暴露给开发者使用的api方法请放在api包中
