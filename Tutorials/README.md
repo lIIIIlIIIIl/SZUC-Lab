@@ -1,11 +1,11 @@
 # 参考链接集中存放文件夹
 
-此次主要存放一些与模组开发相关的学习资源、API文档、工具等，欢迎补充。
+此处主要存放一些与模组开发相关的学习资源、API文档、工具等，欢迎补充。
 
 ## 中文资源
 - **Fabric开发者文档**
-    - https://docs.fabricmc.net/zh_cn/1.20.4/develop/
     - https://fabricmc.net/wiki/zh_cn:tutorial:start
+    - https://docs.fabricmc.net/zh_cn/1.20.4/develop/
 - **Mixin教程**
     - https://blog.csdn.net/qq_36912579/article/details/135503363
 
