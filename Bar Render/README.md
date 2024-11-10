@@ -2,12 +2,12 @@
 
 ## 任务目标：
 参考以下两个状态栏渲染模组，完成一个状态栏渲染Lib模组的编写：
-	### MagicBarLib(Fabric): 
-	- https://www.curseforge.com/minecraft/mc-mods/magicbarlib
-	- https://github.com/Deadlydiamond98/MagicBarLib
-	### Classic Bars(Forge)
-	- https://www.curseforge.com/minecraft/mc-mods/classic-bars
-	- https://github.com/Tfarcenim/ClassicBar
+### MagicBarLib(Fabric): 
+- https://www.curseforge.com/minecraft/mc-mods/magicbarlib
+- https://github.com/Deadlydiamond98/MagicBarLib
+### Classic Bars(Forge)
+- https://www.curseforge.com/minecraft/mc-mods/classic-bars
+- https://github.com/Tfarcenim/ClassicBar
 
 ## 功能要求：
 1. 自动化状态栏创建。
