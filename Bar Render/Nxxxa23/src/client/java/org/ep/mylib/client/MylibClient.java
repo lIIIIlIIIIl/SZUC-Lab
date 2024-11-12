@@ -1,101 +1,67 @@
 package org.ep.mylib.client;
 
+import jos.nxxxa23.custombar.BarManager;
+import jos.nxxxa23.custombar.api.BarAPI;
+import jos.nxxxa23.custombar.info.BarInfo;
+import jos.nxxxa23.custombar.info.BarInfoAbstract;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.minecraft.item.Items;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.util.ClientPlayerTickable;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.text.Text;
 import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
-import org.ep.mylib.client.BarInfo.*;
+
+import java.util.ArrayList;
 
 public class MylibClient implements ClientModInitializer
 {
-    private BarManager barManager = new BarManager();
+    private int tickCount = 20;
 
     @Override
     public void onInitializeClient()
     {
-        barManager.addBarInfo("TestBar1", Colors.RED, 400,
-                BarPlace.MiddleLeft, BarBackgroundType.BACKGROUND1, BarContentType.CONTENT1,
-                Identifier.of("minecraft", "textures/item/barrier.png"),
-                0, 0,
-                16, 16,
-                16, 16);
+        /*
         BarInfo bi = barManager.addBarInfo("TestBar2", 0xFF773322, 400,
                 BarPlace.MiddleRight, BarBackgroundType.BACKGROUND1, BarContentType.CONTENT1,
                 Identifier.of("minecraft", "textures/item/barrier.png"),
                 0, 0,
                 16, 16,
                 16, 16);
-        barManager.addBarInfo("TestBar3", 0xFF713322, 400,
-                BarPlace.MiddleLeft, BarBackgroundType.BACKGROUND1, BarContentType.CONTENT1,
-                Identifier.of("minecraft", "textures/item/barrier.png"),
-                0, 0,
-                16, 16,
-                16, 16);
-        barManager.addBarInfo("TestBar4", 0xFF1133F2, 400,
-                BarPlace.MiddleRight, BarBackgroundType.BACKGROUND1, BarContentType.CONTENT1,
-                Identifier.of("minecraft", "textures/item/barrier.png"),
-                0, 0,
-                16, 16,
-                16, 16);
-
-        barManager.addBarInfo("TestBar5", 0xFF1033A6, 400,
-                BarPlace.TopLeft, BarBackgroundType.BACKGROUND1, BarContentType.CONTENT1,
-                Identifier.of("minecraft", "textures/item/barrier.png"),
-                0, 0,
-                16, 16,
-                16, 16);
-        barManager.addBarInfo("TestBar6", 0xFF1237B1, 400,
-                BarPlace.TopLeft, BarBackgroundType.BACKGROUND1, BarContentType.CONTENT1,
-                Identifier.of("minecraft", "textures/item/barrier.png"),
-                0, 0,
-                16, 16,
-                16, 16);
-
-        barManager.addBarInfo("TestBar7", 0xFF2381C1, 400,
-                BarPlace.TopRight, BarBackgroundType.BACKGROUND1, BarContentType.CONTENT1,
-                Identifier.of("minecraft", "textures/item/barrier.png"),
-                0, 0,
-                16, 16,
-                16, 16);
-        barManager.addBarInfo("TestBar8", 0xFFABABAB, 400,
-                BarPlace.TopRight, BarBackgroundType.BACKGROUND1, BarContentType.CONTENT1,
-                Identifier.of("minecraft", "textures/item/barrier.png"),
-                0, 0,
-                16, 16,
-                16, 16);
-
-        barManager.addBarInfo("TestBar9", 0xFF192C12, 400,
-                BarPlace.BottomLeft, BarBackgroundType.BACKGROUND1, BarContentType.CONTENT1,
-                Identifier.of("minecraft", "textures/item/barrier.png"),
-                0, 0,
-                16, 16,
-                16, 16);
-        barManager.addBarInfo("TestBar10", 0xFFAD1010, 400,
-                BarPlace.BottomLeft, BarBackgroundType.BACKGROUND1, BarContentType.CONTENT1,
-                Identifier.of("minecraft", "textures/item/barrier.png"),
-                0, 0,
-                16, 16,
-                16, 16);
-
-        barManager.addBarInfo("TestBar11", 0xFFAD11CB, 400,
-                BarPlace.BottomRight, BarBackgroundType.BACKGROUND1, BarContentType.CONTENT1,
-                Identifier.of("minecraft", "textures/item/barrier.png"),
-                0, 0,
-                16, 16,
-                16, 16);
-        barManager.addBarInfo("TestBar12", 0xFFDDBBAA, 400,
-                BarPlace.BottomRight, BarBackgroundType.BACKGROUND1, BarContentType.CONTENT1,
-                Identifier.of("minecraft", "textures/item/barrier.png"),
-                0, 0,
-                16, 16,
-                16, 16);
 
         bi.curProgress = 100;
+        */
+
+        BarInfo<Float> bi = BarAPI.createBar("TestBar2", -60f, 60f)
+                .color(0xFFFFD700)
+                .place(BarInfoAbstract.BarPlace.MiddleLeft)
+                .background(BarInfoAbstract.BarBackgroundType.BACKGROUND1)
+                .content(BarInfoAbstract.BarContentType.CONTENT1)
+                .icon(Identifier.of("minecraft", "textures/item/leather_chestplate.png"))
+                .iconCrop(0, 0, 16, 16, 16, 16)
+                .build();
 
         HudRenderCallback.EVENT.register((ctx, deltaTick) ->
         {
-            barManager.render(ctx);
+            BarAPI.render(ctx);
+        });
+
+        ClientTickEvents.END_WORLD_TICK.register((world) ->
+        {
+            tickCount++;
+            if (tickCount >= 20)
+            {
+                bi.setCurProgress(MyPlayerUtil.calculateTemperature(world, MinecraftClient.getInstance().player.getBlockPos()));
+                tickCount = 0;
+            }
         });
     }
+
+
 }

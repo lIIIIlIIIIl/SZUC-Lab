@@ -1,11 +1,13 @@
-package org.ep.mylib.client;
+package jos.nxxxa23.custombar;
 
+import jos.nxxxa23.custombar.info.BarInfoAbstract;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.realms.util.TextRenderingUtils;
 import net.minecraft.util.Identifier;
-import org.ep.mylib.client.BarInfo.*;
+import jos.nxxxa23.custombar.info.BarInfoAbstract.*;
+
+import java.text.DecimalFormat;
 
 public class BarRenderer
 {
@@ -56,30 +58,30 @@ public class BarRenderer
     private static final int BAR_CONTENT3_WIDTH = 77;
     private static final int BAR_CONTENT3_HEIGHT = 5;
 
-    public static void drawBar(DrawContext ctx, float x, float y, float barScale, BarInfo barInfo)
+    public static void drawBar(DrawContext ctx, float x, float y, float barScale, BarInfoAbstract barInfo)
     {
         ctx.getMatrices().push();
-        ctx.getMatrices().translate(x, y, 0f);
+        ctx.getMatrices().translate(x, y, 50f);
         ctx.getMatrices().push();
         ctx.getMatrices().scale(barScale, barScale, 1f);
 
         ctx.getMatrices().translate(0f, 4.5f, 0f);
 
         myDrawTextRightAligned(ctx, MinecraftClient.getInstance().textRenderer,
-                String.valueOf(barInfo.curProgress), barInfo.color, 14, 0.55f);
+                String.valueOf(new DecimalFormat("#.0").format(barInfo.getCurProgress())), barInfo.getColor(), 14, 0.55f);
 
         ctx.getMatrices().translate(1f, -4.5f, 0f);
 
-        ctx.drawTexture(barInfo.icon,
+        ctx.drawTexture(barInfo.getIcon(),
                 0, 0,
                 9, 9,
-                barInfo.iconU, barInfo.iconV,
-                barInfo.iconWidth, barInfo.iconHeight,
-                barInfo.fromWidth, barInfo.fromHeight);
+                barInfo.getIconU(), barInfo.getIconV(),
+                barInfo.getIconWidth(), barInfo.getIconHeight(),
+                barInfo.getFromWidth(), barInfo.getFromHeight());
 
         ctx.getMatrices().translate(10, 0, 0);
 
-        switch (barInfo.backgroundType)
+        switch (barInfo.getBackgroundType())
         {
             case BACKGROUND1:
                 ctx.drawTexture(BAR_TEXTURES,
@@ -99,16 +101,16 @@ public class BarRenderer
                 break;
         }
 
-        ctx.setShaderColor(((barInfo.color >> 16) & 0x00FF) / 255.0f,
-                ((barInfo.color >> 8) & 0x0000FF) / 255.0f,
-                (barInfo.color & 0x000000FF) / 255.0f,
-                ((barInfo.color >> 24) & 0xFF) / 255.0f);
-        switch (barInfo.contentType)
+        ctx.setShaderColor(((barInfo.getColor() >> 16) & 0x00FF) / 255.0f,
+                ((barInfo.getColor() >> 8) & 0x0000FF) / 255.0f,
+                (barInfo.getColor() & 0x000000FF) / 255.0f,
+                ((barInfo.getColor() >> 24) & 0xFF) / 255.0f);
+        switch (barInfo.getContentType())
         {
             case CONTENT1:
                 ctx.drawTexture(BAR_TEXTURES,
                         2, 2,
-                        Math.round(BAR_CONTENT1_WIDTH * ((float)barInfo.curProgress / barInfo.maxProgress)), BAR_CONTENT1_HEIGHT,
+                        Math.round(BAR_CONTENT1_WIDTH * barInfo.getProgressRatio()), BAR_CONTENT1_HEIGHT,
                         BAR_CONTENT1_U, BAR_CONTENT1_V,
                         BAR_CONTENT1_WIDTH, BAR_CONTENT1_HEIGHT,
                         BAR_TEXTURES_WIDTH, BAR_TEXTURES_HEIGHT);
@@ -116,17 +118,17 @@ public class BarRenderer
             case CONTENT2:
                 ctx.drawTexture(BAR_TEXTURES,
                         1, 1,
-                        Math.round(BAR_CONTENT2_WIDTH * ((float)barInfo.curProgress / barInfo.maxProgress)), BAR_CONTENT2_HEIGHT,
+                        Math.round(BAR_CONTENT2_WIDTH * barInfo.getProgressRatio()), BAR_CONTENT2_HEIGHT,
                         BAR_CONTENT2_U, BAR_CONTENT2_V,
-                        Math.round(BAR_CONTENT2_WIDTH * ((float)barInfo.curProgress / barInfo.maxProgress)), BAR_CONTENT2_HEIGHT,
+                        Math.round(BAR_CONTENT2_WIDTH * barInfo.getProgressRatio()), BAR_CONTENT2_HEIGHT,
                         BAR_TEXTURES_WIDTH, BAR_TEXTURES_HEIGHT);
                 break;
             case CONTENT3:
                 ctx.drawTexture(BAR_TEXTURES,
                         2, 2,
-                        Math.round(BAR_CONTENT3_WIDTH * ((float)barInfo.curProgress / barInfo.maxProgress)), BAR_CONTENT3_HEIGHT,
+                        Math.round(BAR_CONTENT3_WIDTH * barInfo.getProgressRatio()), BAR_CONTENT3_HEIGHT,
                         BAR_CONTENT3_U, BAR_CONTENT3_V,
-                        Math.round(BAR_CONTENT3_WIDTH * ((float)barInfo.curProgress / barInfo.maxProgress)), BAR_CONTENT3_HEIGHT,
+                        Math.round(BAR_CONTENT3_WIDTH * barInfo.getProgressRatio()), BAR_CONTENT3_HEIGHT,
                         BAR_TEXTURES_WIDTH, BAR_TEXTURES_HEIGHT);
                 break;
         }
@@ -135,28 +137,28 @@ public class BarRenderer
         ctx.getMatrices().pop();
     }
 
-    public static void drawBarContrarily(DrawContext ctx, float x, float y, float barScale, BarInfo barInfo)
+    public static void drawBarContrarily(DrawContext ctx, float x, float y, float barScale, BarInfoAbstract barInfo)
     {
         ctx.getMatrices().push();
-        ctx.getMatrices().translate(x, y, 0f);
+        ctx.getMatrices().translate(x, y, 50f);
         ctx.getMatrices().push();
         ctx.getMatrices().scale(barScale, barScale, 1f);
 
         ctx.getMatrices().translate(0f, 4.5f, 0f);
 
         myDrawTextLeftAligned(ctx, MinecraftClient.getInstance().textRenderer,
-                String.valueOf(barInfo.curProgress), barInfo.color, 14, 0.55f);
+                String.valueOf(new DecimalFormat("#.0").format(barInfo.getCurProgress())), barInfo.getColor(), 14, 0.55f);
 
         ctx.getMatrices().translate(-10f, -4.5f, 0f);
 
-        ctx.drawTexture(barInfo.icon,
+        ctx.drawTexture(barInfo.getIcon(),
                 0, 0,
                 9, 9,
-                barInfo.iconU, barInfo.iconV,
-                barInfo.iconWidth, barInfo.iconHeight,
-                barInfo.fromWidth, barInfo.fromHeight);
+                barInfo.getIconU(), barInfo.getIconV(),
+                barInfo.getIconWidth(), barInfo.getIconHeight(),
+                barInfo.getFromWidth(), barInfo.getFromHeight());
 
-        switch (barInfo.backgroundType)
+        switch (barInfo.getBackgroundType())
         {
             case BACKGROUND1:
                 ctx.getMatrices().translate(-BAR_BACKGROUND1_WIDTH - 1f, 0f, 0f);
@@ -178,16 +180,16 @@ public class BarRenderer
                 break;
         }
 
-        ctx.setShaderColor(((barInfo.color >> 16) & 0x00FF) / 255.0f,
-                ((barInfo.color >> 8) & 0x0000FF) / 255.0f,
-                (barInfo.color & 0x000000FF) / 255.0f,
-                ((barInfo.color >> 24) & 0xFF) / 255.0f);
+        ctx.setShaderColor(((barInfo.getColor() >> 16) & 0x00FF) / 255.0f,
+                ((barInfo.getColor() >> 8) & 0x0000FF) / 255.0f,
+                (barInfo.getColor() & 0x000000FF) / 255.0f,
+                ((barInfo.getColor() >> 24) & 0xFF) / 255.0f);
 
         int progressWidth;
-        switch (barInfo.contentType)
+        switch (barInfo.getContentType())
         {
             case CONTENT1:
-                progressWidth = Math.round(BAR_CONTENT1_WIDTH * ((float)barInfo.curProgress / barInfo.maxProgress));
+                progressWidth = Math.round(BAR_CONTENT1_WIDTH * barInfo.getProgressRatio());
                 ctx.drawTexture(BAR_TEXTURES,
                         2 + (BAR_CONTENT1_WIDTH - progressWidth),
                         2,
@@ -197,7 +199,7 @@ public class BarRenderer
                         BAR_TEXTURES_WIDTH, BAR_TEXTURES_HEIGHT);
                 break;
             case CONTENT2:
-                progressWidth = Math.round(BAR_CONTENT2_WIDTH * ((float)barInfo.curProgress / barInfo.maxProgress));
+                progressWidth = Math.round(BAR_CONTENT2_WIDTH * barInfo.getProgressRatio());
                 ctx.drawTexture(BAR_TEXTURES,
                         1 + (BAR_CONTENT2_WIDTH - progressWidth), 1,
                         progressWidth, BAR_CONTENT2_HEIGHT,
@@ -206,7 +208,7 @@ public class BarRenderer
                         BAR_TEXTURES_WIDTH, BAR_TEXTURES_HEIGHT);
                 break;
             case CONTENT3:
-                progressWidth = Math.round(BAR_CONTENT3_WIDTH * ((float)barInfo.curProgress / barInfo.maxProgress));
+                progressWidth = Math.round(BAR_CONTENT3_WIDTH * barInfo.getProgressRatio());
                 ctx.drawTexture(BAR_TEXTURES,
                         2 + (BAR_CONTENT3_WIDTH - progressWidth), 2,
                         progressWidth, BAR_CONTENT3_HEIGHT,
