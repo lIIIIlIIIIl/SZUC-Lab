@@ -16,7 +16,7 @@
 cd SZUC-Lab/
 
 # git后创建个人文件夹的命令示例，替换"your_name"的内容为你的昵称，带下划线时请保留
-Name="your_name" && (cd 'Bar Render' && mkdir "$Name" && find . -maxdepth 1 -type f -exec cp {} "$Name" \;)
+Name="your_name" && (cd 'Bar Render' && mkdir "$Name" && cp -r gradle "$Name" && find . -maxdepth 1 -type f -exec cp {} "$Name" \;)
 ```
 
 ## 4. 提交流程
