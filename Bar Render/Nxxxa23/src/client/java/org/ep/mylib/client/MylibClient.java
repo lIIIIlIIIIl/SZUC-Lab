@@ -4,6 +4,7 @@ import jos.nxxxa23.custombar.BarManager;
 import jos.nxxxa23.custombar.api.BarAPI;
 import jos.nxxxa23.custombar.info.BarInfo;
 import jos.nxxxa23.custombar.info.BarInfoAbstract;
+import jos.nxxxa23.custombar.info.BarInfoTicked;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -38,30 +39,21 @@ public class MylibClient implements ClientModInitializer
         bi.curProgress = 100;
         */
 
-        BarInfo<Float> bi = BarAPI.createBar("TestBar2", -60f, 60f)
+        BarInfoTicked<Float> bi = BarAPI.createBar("TestBar2", -60f, 60f)
                 .color(0xFFFFD700)
                 .place(BarInfoAbstract.BarPlace.MiddleLeft)
                 .background(BarInfoAbstract.BarBackgroundType.BACKGROUND1)
                 .content(BarInfoAbstract.BarContentType.CONTENT1)
                 .icon(Identifier.of("minecraft", "textures/item/leather_chestplate.png"))
                 .iconCrop(0, 0, 16, 16, 16, 16)
-                .build();
+                .ticked(ClientTickEvents.END_WORLD_TICK, (world) ->
+                {
+                    return MyPlayerUtil.calculateTemperature(world, MinecraftClient.getInstance().player.getBlockPos());
+                }, 20)
+                .buildTicked();
 
-        HudRenderCallback.EVENT.register((ctx, deltaTick) ->
-        {
-            BarAPI.render(ctx);
-        });
-
-        ClientTickEvents.END_WORLD_TICK.register((world) ->
-        {
-            tickCount++;
-            if (tickCount >= 20)
-            {
-                bi.setCurProgress(MyPlayerUtil.calculateTemperature(world, MinecraftClient.getInstance().player.getBlockPos()));
-                tickCount = 0;
-            }
-        });
+        bi.setTicking(true);
+        BarAPI.setHUDRenderCallbackEvent(HudRenderCallback.EVENT);
+        BarAPI.setRendering(true);
     }
-
-
 }
