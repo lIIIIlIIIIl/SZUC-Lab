@@ -2,10 +2,13 @@ package jos.nxxxa23.custombar.api;
 
 import jos.nxxxa23.custombar.*;
 import jos.nxxxa23.custombar.info.*;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.util.Identifier;
 import org.lwjgl.system.SharedLibrary;
+import net.fabricmc.fabric.api.event.Event;
 
 import javax.xml.crypto.Data;
 
@@ -18,7 +21,9 @@ public class BarBuilder<T extends Number>
     private final T maxProgress;
     private TrackedData<T> curProgressTracked;
     private DataTracker dataTracker;
-    private boolean tracked = false;
+    private Event<ClientTickEvents.EndWorldTick> endTickEvent;
+    private BarInfoTicked.UpdateProgress<T> updateProgress;
+    private int apartTick;
     private BarInfo.BarPlace place = BarInfo.BarPlace.TopLeft;
     private BarInfo.BarBackgroundType backgroundType = BarInfo.BarBackgroundType.BACKGROUND1;
     private BarInfo.BarContentType contentType = BarInfo.BarContentType.CONTENT1;
@@ -88,28 +93,39 @@ public class BarBuilder<T extends Number>
     {
         this.curProgressTracked = curTrackedData;
         this.dataTracker = dataTracker;
-        this.tracked = true;
+        return this;
+    }
+
+    public BarBuilder<T> ticked(Event<ClientTickEvents.EndWorldTick> endTickEvent, BarInfoTicked.UpdateProgress<T> updateProgress, int apartTick)
+    {
+        this.endTickEvent = endTickEvent;
+        this.updateProgress = updateProgress;
+        this.apartTick = apartTick;
         return this;
     }
 
     public BarInfo<T> build()
     {
-        return manager.addBarInfo(name, color, minProgress, maxProgress, place,
+        return (BarInfo<T>)manager.addBarInfo(new BarInfo<>(name, color, minProgress, maxProgress,
                 backgroundType, contentType, icon,
                 iconU, iconV, iconWidth, iconHeight,
-                fromWidth, fromHeight);
+                fromWidth, fromHeight), place);
     }
 
     public BarInfoTracked<T> buildTracked()
     {
-        if (this.tracked)
-        {
-            throw new IllegalStateException("BarBuilder has been set tracked");
-        }
-        return manager.addBarInfo(name, color, minProgress, maxProgress, curProgressTracked, dataTracker,
-                place,
+        return (BarInfoTracked<T>)manager.addBarInfo(new BarInfoTracked(name, color, minProgress, maxProgress, curProgressTracked, dataTracker,
                 backgroundType, contentType, icon,
                 iconU, iconV, iconWidth, iconHeight,
-                fromWidth, fromHeight);
+                fromWidth, fromHeight), place);
+    }
+
+    public BarInfoTicked<T> buildTicked()
+    {
+        return (BarInfoTicked<T>)manager.addBarInfo(new BarInfoTicked(name, color, minProgress, maxProgress,
+                endTickEvent, updateProgress, apartTick,
+                backgroundType, contentType, icon,
+                iconU, iconV, iconWidth, iconHeight,
+                fromWidth, fromHeight), place);
     }
 }

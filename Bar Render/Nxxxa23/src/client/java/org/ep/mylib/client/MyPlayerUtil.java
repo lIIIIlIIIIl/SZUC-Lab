@@ -42,14 +42,10 @@ public class MyPlayerUtil
 
         for (Map.Entry<RegistryEntry<Biome>, Float> entry : distances.entrySet())
         {
-            //System.out.println(entry.getKey().getKey().get().getValue().getPath() + ": " + entry.getValue());
-            //System.out.println(entry.getKey().getKey().get().getValue().getPath() + ": " + (entry.getKey().value().getTemperature() / PLAINS_TEMPERATURE_REFER_RATIO * PLAINS_TEMPERATURE));
             float weight = 1f / entry.getValue(); // 距离越近，权重越大
             totalWeight += weight;
             totalWeightedTemperature += weight * (entry.getKey().value().getTemperature() / PLAINS_TEMPERATURE_REFER_RATIO * PLAINS_TEMPERATURE);
-            //System.out.println(weight);
         }
-        //System.out.println("----------------");
 
 
         return totalWeightedTemperature / totalWeight;
