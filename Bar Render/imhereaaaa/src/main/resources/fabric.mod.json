@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "imhereaaaa",
+  "version": "${version}",
+  "name": "imhereaaaa",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/imhereaaaa/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.imhereaaaa.client.ModRenderClient"
+    ],
+    "main": [
+      "com.imhereaaaa.ModRender"
+    ]
+  },
+  "mixins": [
+    "imhereaaaa.mixins.json",
+    {
+      "config": "imhereaaaa.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

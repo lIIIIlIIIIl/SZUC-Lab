@@ -1,0 +1,12 @@
+{
+  "name": "default",
+  "type": 1,
+  "color": "0xFF000000",
+  "sub": [
+    {
+      "name": "minecraft:speed",
+      "type": 1,
+      "color": "0xFFFF0000"
+    }
+  ]
+}
