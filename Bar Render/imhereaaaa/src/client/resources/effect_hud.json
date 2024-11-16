@@ -1,0 +1,20 @@
+{
+  "type": 1,
+  "color": "0xFF6A5ACD",
+  "icon": "default.png",
+  "sub": [
+    {
+      "id": "minecraft:speed",
+      "name": "speeeeeeed",
+      "type": 1,
+      "color": "0xFFFF0000"
+    },
+    {
+      "id": "minecraft:luck",
+      "name": "fuck",
+      "type": 2,
+      "color": "0xFFFFFFFF",
+      "icon": "luck.png"
+    }
+  ]
+}
