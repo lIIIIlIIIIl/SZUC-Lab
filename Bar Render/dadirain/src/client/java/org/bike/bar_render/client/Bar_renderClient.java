@@ -2,44 +2,39 @@ package org.bike.bar_render.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.VertexConsumerProvider;
+
 import org.bike.bar_render.client.api.StatusBarAPI;
-import org.bike.bar_render.client.renderer.HudOverlay;
 import org.bike.bar_render.client.renderer.StatusBarLayoutManager;
 
 public class Bar_renderClient implements ClientModInitializer {
-
     @Override
     public void onInitializeClient() {
-
-        /*HudRenderCallback.EVENT.register(new HudOverlay() {
-            @Override
-            public void onHudRender(DrawContext drawContext, float tickDelta) {
-
-            }
-        });*/
-
-        //VertexConsumerProvider.Immediate vertexConsumers = client.getBufferBuilders().getEntityVertexConsumers();
-        //drawContext = new DrawContext(client, vertexConsumers);
-        //if(client.player != null){
-        //Barinfo<Float> floatBarinfo = BarManager.creatbar("Test",0F,,);
-        //}
         MinecraftClient client = MinecraftClient.getInstance();
 
-        StatusBarAPI.setLayoutManager(StatusBarLayoutManager.StatusBarLayoutType.TOP);
-        StatusBarAPI.registerStatusBar("health_bar", "textures/gui/mana_empty.png", 0xFF0000, 20f, 15f);
-        ClientTickEvents.END_CLIENT_TICK.register(mcclient -> {
-            if (client.getBufferBuilders() != null) {
-                VertexConsumerProvider.Immediate vertexConsumers = client.getBufferBuilders().getEntityVertexConsumers();
-                DrawContext drawContext = new DrawContext(client, vertexConsumers);
 
-                // 调用 StatusBar 渲染
-                StatusBarAPI.renderStatusBars(drawContext);
+        StatusBarAPI.ValueManager valueManager = new StatusBarAPI.ValueManager();
+        StatusBarAPI.ValueManager valueManager2 = new StatusBarAPI.ValueManager();
+
+
+        StatusBarAPI.setLayoutManager(StatusBarLayoutManager.StatusBarLayoutType.LEFT);
+
+
+        ClientTickEvents.END_CLIENT_TICK.register(mcclient -> {
+            if (client.player != null) {
+                // 获取玩家的最大生命值和当前生命值
+                valueManager.setCurValue(client.player.getHealth());
+                valueManager.setMaxValue(client.player.getMaxHealth());
+                valueManager2.setCurValue(client.player.getHealth());
+                valueManager2.setMaxValue(client.player.getMaxHealth());
             }
         });
+
+        StatusBarAPI.registerStatusBar("health_bar", "textures/gui/mana_empty.png", "textures/gui/icon.png", "textures/gui/mana_full.png", 0xFF0000, valueManager);
+        StatusBarAPI.registerStatusBar("health_bar2", "textures/gui/mana_empty.png", "textures/gui/icon.png", "textures/gui/mana_full.png", 0xFF0000, valueManager2);
+
+        StatusBarAPI.renderBars();
+
     }
 
 }
