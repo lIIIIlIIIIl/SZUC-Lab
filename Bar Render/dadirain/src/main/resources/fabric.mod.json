@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "bar_render",
+  "version": "${version}",
+  "name": "Bar Render",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/bar_render/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "org.bike.bar_render.client.Bar_renderClient"
+    ],
+    "main": [
+      "org.bike.bar_render.Bar_render"
+    ]
+  },
+  "mixins": [
+    "bar_render.mixins.json",
+    {
+      "config": "bar_render.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
