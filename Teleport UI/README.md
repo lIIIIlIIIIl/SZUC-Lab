@@ -13,7 +13,7 @@
 3. 实现**按钮交互**事件；
 4. 可选：
     - 参考`resources`文件夹下，XYZ的项目`UI-template.zip`(react)；
-    - `react`学习资料：https://zh-hans.react.dev/learn；
+    - `react`学习资料：https://zh-hans.react.dev/learn ；
 	- 其他你觉得有意义的功能和组件。
 
 ## 注意事项：
