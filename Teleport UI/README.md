@@ -22,7 +22,11 @@
     - nether.jpg
     - the_end.jpg
 - 使用jar导入Improper UI依赖（当前文件夹）：
-``` bash
-# 使用首页git创建个人文件夹后，替换"your_name"的内容为你的昵称，带下划线时请保留
-Name="your_name" && (cd "$Name" && mkdir "libs" && cd "libs" && curl -O https://github.com/ItziSpyder/ImproperUI/releases/download/v0.0.6-BETA/ImproperUI-1-20-0.0.6-BETA.jar)
+    - 复制`libs`文件夹到你的个人工作目录
+    - 原`build.gradle`中已添加该依赖：
+``` build.gradle 20-26
+dependencies {
+    ...
+    compileOnly files("libs/ImproperUI-1.20.1.jar")
+}
 ```
