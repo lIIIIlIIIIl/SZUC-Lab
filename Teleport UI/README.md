@@ -21,12 +21,19 @@
     - overworld.jpg
     - nether.jpg
     - the_end.jpg
-- 使用jar导入Improper UI依赖（当前文件夹）：
-    - 复制`libs`文件夹到你的个人工作目录
+- `Improper UI`依赖导入：
+    - 对比该模组Github文档，下面给出的导入方式更适应开发；
     - 原`build.gradle`中已添加该依赖：
-``` build.gradle 20-26
+``` groovy
+repositories {
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
+}
+
 dependencies {
     ...
-    compileOnly files("libs/ImproperUI-1.20.1.jar")
+    modImplementation "maven.modrinth:improperui:1-20-0.0.6-BETA"
 }
 ```

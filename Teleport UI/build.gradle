@@ -10,11 +10,11 @@ base {
     archivesName = project.archives_base_name
 }
 
-
 repositories {
-//    maven {
-//        url "https://cursemaven.com"
-//    }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
 }
 
 dependencies {
@@ -22,7 +22,7 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    compileOnly files("libs/ImproperUI-1.20.1.jar")
+    modImplementation "maven.modrinth:improperui:1-20-0.0.6-BETA"
 }
 
 processResources {
