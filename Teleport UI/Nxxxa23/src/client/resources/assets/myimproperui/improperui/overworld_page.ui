@@ -1,0 +1,121 @@
+div #background-gradient {
+    size: 100%
+    margin-top: 100%
+    shadow-distance: 50%
+    shadow-color: #73B48E
+}
+
+div #body {
+    size: 400 225
+    center: both
+    background-image: myimproperui:textures/overworld.jpg
+    text-align: center
+
+    child-align: grid
+    grid-columns: 3
+
+    button #leftbutton {
+        size: 10 20
+        background-color: #000000
+        margin-top: 102
+        opacity: 0.7
+        border-radius: 0
+        border-thickness: 0
+        inner-text: "<"
+        text-color: #FFFFFF
+
+        on-click: changePageToTheEnd
+
+        hovered => {
+            opacity: 1.0
+        }
+    }
+
+    div #text {
+        size: 320 225
+        margin-left: 24
+        margin-right: 24
+        text-align: center
+        background-color: none
+
+        child-align: grid
+        grid-columns: 1
+
+        div #title {
+            size: 100% 27
+            inner-text: "主世界"
+            text-scale: 3
+            text-align: center
+            text-shadow: true
+            text-color: #73B48E
+            background-color: none
+            margin-top: 70
+        }
+        div #infoline1 {
+            size: 100% 9
+            inner-text: "欢迎来到主世界，Minecraft的主要维度。这个充满生机和多样化的世界，资"
+            text-scale: 1
+            text-align: center
+            text-shadow: true
+            text-color: #BEE2AA
+            background-color: none
+            margin-top: 30
+        }
+
+        div #infoline2 {
+            size: 100% 9
+            inner-text: "源丰富，充满了冒险与创造的无限可能。"
+            text-scale: 1
+            text-align: center
+            text-shadow: true
+            text-color: #BEE2AA
+            background-color: none
+        }
+
+        div #gotobuttoncontainer {
+            margin-top: 30
+            size: 100% 10
+            background-color: none
+            button #goto {
+                x: 130
+                size: 50 10
+                padding: 5
+                border-thickness: 1
+                border-color: #555555
+                border-radius: 0
+                background-color: #BBBBBB
+                opacity: 0.9
+
+                on-click: transportToOverWorld
+
+                inner-text: "前往 主世界"
+                text-color: #FFFFFFFF
+                text-shadow: true
+
+                hovered => {
+                    opacity: 1.0
+                    shadow-distance: 1
+                    shadow-color: #444444
+                }
+            }
+        }
+    }
+
+    button #rightbutton {
+        size: 10 20
+        background-color: #000000
+        margin-top: 102
+        opacity: 0.7
+        border-radius: 0
+        border-thickness: 0
+        inner-text: ">"
+        text-color: #FFFFFF
+
+        on-click: changePageToNether
+
+        hovered => {
+            opacity: 1.0
+        }
+    }
+}
+

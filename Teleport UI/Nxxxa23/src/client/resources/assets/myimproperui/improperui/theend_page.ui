@@ -1,0 +1,122 @@
+div #background-gradient {
+    size: 100%
+    margin-top: 100%
+    shadow-distance: 50%
+    shadow-color: #DF9DFF
+}
+
+div #body {
+    size: 400 225
+    center: both
+    background-image: myimproperui:textures/the_end.jpg
+    text-align: center
+
+    child-align: grid
+    grid-columns: 3
+
+    button #leftbutton {
+        size: 10 20
+        background-color: #000000
+        margin-top: 102
+        opacity: 0.7
+        border-radius: 0
+        border-thickness: 0
+        inner-text: "<"
+        text-color: #FFFFFF
+
+        on-click: changePageToNether
+
+        hovered => {
+            opacity: 1.0
+        }
+    }
+
+    div #text {
+        size: 320 225
+        margin-left: 24
+        margin-right: 24
+        center: both
+        text-align: center
+        background-color: none
+
+        child-align: grid
+        grid-columns: 1
+
+        div #title {
+            size: 100% 27
+            inner-text: "末地"
+            text-scale: 3
+            text-align: center
+            text-shadow: true
+            text-color: #DF9DFF
+            background-color: none
+            margin-top: 70
+        }
+        div #infoline1 {
+            size: 100% 9
+            inner-text: "欢迎来到末地，一个神秘且充满挑战的维度。这个虚幻的世界是强大的末影"
+            text-scale: 1
+            text-align: center
+            text-shadow: true
+            text-color: #EDC7F7
+            background-color: none
+            margin-top: 30
+        }
+
+        div #infoline2 {
+            size: 100% 9
+            inner-text: "龙的栖息地，隐藏着巨大的秘密和强大的力量。"
+            text-scale: 1
+            text-align: center
+            text-shadow: true
+            text-color: #EDC7F7
+            background-color: none
+        }
+
+        div #gotobuttoncontainer {
+            margin-top: 30
+            size: 100% 10
+            background-color: none
+            button #goto {
+                x: 130
+                size: 50 10
+                padding: 5
+                border-thickness: 1
+                border-color: #555555
+                border-radius: 0
+                background-color: #BBBBBB
+                opacity: 0.9
+
+                on-click: transportToTheEnd
+
+                inner-text: "前往 末地"
+                text-color: #FFFFFFFF
+                text-shadow: true
+
+                hovered => {
+                    opacity: 1.0
+                    shadow-distance: 1
+                    shadow-color: #444444
+                }
+            }
+        }
+    }
+
+    button #rightbutton {
+        size: 10 20
+        background-color: #000000
+        margin-top: 102
+        opacity: 0.7
+        border-radius: 0
+        border-thickness: 0
+        inner-text: ">"
+        text-color: #FFFFFF
+
+        on-click: changePageToOverWorld
+
+        hovered => {
+            opacity: 1.0
+        }
+    }
+}
+
