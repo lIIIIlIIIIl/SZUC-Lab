@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "myimproperui",
+  "version": "${version}",
+  "name": "MyImproperUI",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/myimproperui/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "org.ep.myimproperui.client.MyimproperuiClient"
+    ],
+    "main": [
+      "org.ep.myimproperui.Myimproperui"
+    ]
+  },
+  "mixins": [
+    "myimproperui.mixins.json",
+    {
+      "config": "myimproperui.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
