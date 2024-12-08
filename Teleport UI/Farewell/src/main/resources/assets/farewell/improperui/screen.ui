@@ -1,0 +1,98 @@
+div #background-gradient {
+    size: 100%
+    margin-top: 100%
+    shadow-distance: 45%
+}
+
+div #display {
+    size: 320 180
+    center: both
+    background-image: farewell:textures/overworld.jpg
+    border-thickness: 1
+    border-color: #412752
+    shadow-distance: 5
+
+    child-align: grid
+    grid-columns: 1
+
+    div #title {
+        inner-text: "主世界"
+        size: 100% 10
+        text-align: center
+        text-scale: 1.85
+        text-color: #83cb6c
+        text-shadow: true
+        background-color: #9f9f9f
+        margin-top: 50
+    }
+
+    div #collection {
+        center: both
+
+        margin-bottom: 5
+        child-align: grid
+        grid-columns: 0
+
+        button #left {
+            inner-text: "<"
+            size: 100% 8 16
+            border-thickness: 1
+            border-radius: 0
+            background-color: #919191a6
+
+            margin-left: 0
+            on-click: turnToEnd
+        }
+
+        div #description {
+            inner-text: "欢迎来到主世界，Minecraft的主要维度。这个充满生机和多样化的世界，资源丰富，"
+            size: 100% 10
+            text-align: center
+            text-scale: 0.7
+            text-color: #caeea9
+            text-shadow: true
+            border-color: #2a4e27
+            background-color: none
+            margin-top: 20
+        }
+
+        div #description {
+            inner-text: "充满了冒险与创造的无限可能。"
+            size: 100% 10
+            text-align: center
+            text-scale: 0.7
+            text-color: #caeea9
+            text-shadow: true
+            background-color: none
+            margin-top: 0
+        }
+
+        button #right {
+            inner-text: ">"
+            size: 100% 8 16
+            border-thickness: 1
+            border-radius: 0
+            background-color: #919191a6
+            margin-right: 0
+
+            on-click: turnToNether
+        }
+    }
+
+    button #tpoverworld {
+        inner-text: "前往 主世界"
+        size: 100% 10 8
+        background-color: #707078a6
+        border-thickness: 1
+        text-align: center
+        text-scale: 0.7
+        text-color: white
+        text-shadow: true
+        margin: 0
+        width: 15%
+        padding-left: 0
+        padding-right: 0
+
+        on-click: teleportToOverworld
+    }
+}

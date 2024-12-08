@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "fawa",
+  "version": "${version}",
+  "name": "Fawa",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "org.poition.farewell.client.FarewellClient"
+    ],
+    "main": [
+      "org.poition.farewell.Farewell"
+    ]
+  },
+  "mixins": [
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
