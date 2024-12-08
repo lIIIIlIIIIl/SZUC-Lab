@@ -1,0 +1,94 @@
+div #background-gradient {
+    size: 100%
+    margin-top: 100%
+    shadow-distance: 45%
+}
+
+div #main {
+    size: 320 180
+    center: both
+    background-image: farewell:textures/overworld.jpg
+    border-thickness: 1
+    border-color: #412752
+    border-radius: 0
+    shadow-distance: 5
+
+    div #title {
+        inner-text: "主世界"
+        size: 100% 10
+        text-align: center
+        text-scale: 1.85
+        text-color: #7FBF7F
+        text-shadow: true
+        shadow-color: #0F5F0F
+        background-color: none
+        margin-top: 50
+    }
+
+    div #motto {
+        inner-text: "欢迎来到主世界，Minecraft的主要维度。这个充满生机和多样化的世界，资源丰富，"
+        size: 100% 10
+        text-align: center
+        text-scale: 0.7
+        text-color: #E0F8E0
+        text-shadow: true
+        shado-color: #0A3F0A
+        background-color: none
+        margin-top: 75
+    }
+
+    div #motto {
+        inner-text: "充满了冒险与创造的无限可能。"
+        size: 100% 10
+        text-align: center
+        text-scale: 0.7
+        text-color: #E0F8E0
+        text-shadow: true
+        shado-color: #0A3F0A
+        background-color: none
+        margin-top: 83
+    }
+
+    button #left {
+        inner-text: "<"
+        size: 2% 18
+        text-color: white
+        text-shadow: true
+        border-radius: 0
+        background-color: #010101a6
+        margin-top: 79
+        margin-left: 4
+
+        on-click: turnToEnd
+    }
+
+    button #right {
+        inner-text: ">"
+        size: 2% 18
+        text-color: white
+        text-shadow: true
+        border-radius: 0
+        background-color: #010101a6
+        margin-top: 79
+        margin-left: 310
+
+        on-click: turnToNether
+    }
+
+    button #tp {
+        inner-text: "前往 主世界"
+        size: 42 12
+        background-color: #707078a6
+        border-thickness: 1
+        border-radius: 0
+        text-align: center
+        text-scale: 0.7
+        text-color: white
+        text-shadow: true
+        margin-top: 113
+        margin-left: 137
+
+        on-click: teleportToOverworld
+    }
+
+}

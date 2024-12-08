@@ -1,0 +1,94 @@
+div #background-gradient {
+    size: 100%
+    margin-top: 100%
+    shadow-distance: 45%
+}
+
+div #main {
+    size: 320 180
+    center: both
+    background-image: farewell:textures/nether.jpg
+    border-thickness: 1
+    border-color: #412752
+    border-radius: 0
+    shadow-distance: 5
+
+    div #title {
+        inner-text: "地狱"
+        size: 100% 10
+        text-align: center
+        text-scale: 1.85
+        text-color: #FF8C5A
+        text-shadow: true
+        shadow-color: #8B0000
+        background-color: none
+        margin-top: 50
+    }
+
+    div #motto {
+        inner-text: "欢迎来到地狱，一个充满火焰和硫磺的恶劣维度。这个危险的世界充满了独特的"
+        size: 100% 10
+        text-align: center
+        text-scale: 0.7
+        text-color: #FFE0D0
+        text-shadow: true
+        shadow-color: #5C0000
+        background-color: none
+        margin-top: 75
+    }
+
+    div #motto {
+        inner-text: "资源和可怕的生物。"
+        size: 100% 10
+        text-align: center
+        text-scale: 0.7
+        text-color: #FFE0D0
+        text-shadow: true
+        shadow-color: #5C0000
+        background-color: none
+        margin-top: 83
+    }
+
+    button #left {
+        inner-text: "<"
+        size: 2% 18
+        text-color: white
+        text-shadow: true
+        border-radius: 0
+        background-color: #010101a6
+        margin-top: 79
+        margin-left: 4
+
+        on-click: turnToOverworld
+    }
+
+    button #right {
+        inner-text: ">"
+        size: 2% 18
+        text-color: white
+        text-shadow: true
+        border-radius: 0
+        background-color: #010101a6
+        margin-top: 79
+        margin-left: 310
+
+        on-click: turnToEnd
+    }
+
+    button #tp {
+        inner-text: "前往 地狱"
+        size: 42 12
+        background-color: #707078a6
+        border-thickness: 1
+        border-radius: 0
+        text-align: center
+        text-scale: 0.7
+        text-color: white
+        text-shadow: true
+        margin-top: 113
+        margin-left: 137
+
+        on-click: teleportToNether
+    }
+
+}
